@@ -88,7 +88,7 @@ namespace PermutationGenerator
          *  sum = count(elements < perm[0]) = 3
          *  
          *  for(int i = 1; i < perm.length; ++i) {
-         *      sum *= (n-(i+1))
+         *      sum *= (perm.length-(i))
          *      sum += count(element[j] < element[i] where j > i)
          *  }
          *  
@@ -146,13 +146,27 @@ namespace PermutationGenerator
          *     to [3, 5, 1, 0, 4, 2]
          */
 
-        public static int getPermIndex(int[] permutation, int[] orderedList)
+        public static int getPermIndex(int[] permutation)
         {
+            int sum = 0;
+            int permLen = permutation.Length;
 
-            return 0;
+            for (int i = 1; i < permLen; ++i)
+                if (permutation[i] < permutation[0])
+                    sum++;
+
+            for(int i = 1; i < permLen; ++i)
+            {
+                sum *= permutation.Length - i;
+                for (int j = i + 1; j < permLen; ++j)
+                    if (permutation[j] < permutation[i])
+                        sum++;
+            }
+
+            return sum;
         }
 
-        public static int[] getPermutation(int n, int[] orderedList)
+        public static int[] getPermutation(int n)
         {
             return new int[0];
         }
