@@ -9,8 +9,10 @@ namespace PermutationGenerator
     public class factoradicPermutationGenerator
     {
         /*
-         * n this article, a factorial number representation will be flagged by a subscript "!", so for instance 341010! stands for 354413021100, 
-         * whose value is: 
+         * 
+         * n this article, a factorial number representation 
+         * will be flagged by a subscript "!", so for instance 341010!'s value is:
+         * 
          * = 3×5! + 4×4! + 1×3! + 0×2! + 1×1! + 0×0! 
          * = ((((3×5 + 4)×4 + 1)×3 + 0)×2 + 1)×1 + 0
          * =  46310.
@@ -81,6 +83,10 @@ namespace PermutationGenerator
 
 
         /* 
+         *  arr[] perm         = [0, 1, 2, 3, 5, 4]
+         *  arr[] targ         = [0, 0, 0, 0, 1, 0]
+         *  index = 1;
+         *  
          *  arr[] perm         = [3, 5, 1, 0, 4, 2]
          *  arr[] targFactPerm = [3, 4, 1, 0, 1, 0]
          *  
@@ -144,6 +150,20 @@ namespace PermutationGenerator
          *  463 = [3, 4, 1, 0, 1, 0]
          *   
          *     to [3, 5, 1, 0, 4, 2]
+         *     
+         *     
+         *   decoding 1
+         *   
+         *   1 % 1 = 0;
+         *   1 / 2 = .5
+         *   
+         *   1 % .5 = 1;
+         *   1 / .5 = stop
+         *   
+         *   1 = [1, 0]
+         *       [0, 1, 2, 3, 4, 5]
+         *       
+         *   to = [1, 0, 2, 3, 4, 5]
          */
 
         public static int getPermIndex(int[] permutation)
@@ -168,7 +188,17 @@ namespace PermutationGenerator
 
         public static int[] getPermutation(int n)
         {
-            return new int[0];
+            Stack<int> perm = new Stack<int>();
+
+            int factBase = 1;
+            while(n / factBase > 0)
+            {
+                perm.Push(n % factBase);
+                n /= factBase;
+                factBase++;
+            }
+            perm.Push(n % factBase);
+            return perm.ToArray();
         }
     }
 
@@ -176,7 +206,8 @@ namespace PermutationGenerator
     {
         public static void Main(string[] args)
         {
-
+            factoradicPermutationGenerator.getPermutation(463);
+            Console.ReadKey();
         }
     }
 }

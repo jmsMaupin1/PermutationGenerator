@@ -10,13 +10,19 @@ namespace PermutationGeneratorTests
         [TestMethod]
         public void getPermutation_PermIndexZero_returnCorrectlyOrderedArray()
         {
-            CollectionAssert.AreEqual(factoradicPermutationGenerator.getPermutation(0, new int[] { 1, 2, 3, 4, 5 }), new int[] { 1, 2, 3, 4, 5 });
+            CollectionAssert.AreEqual(factoradicPermutationGenerator.getPermutation(0), new int[] { 0 });
         }
 
         [TestMethod]
         public void getPermutation_PermIndexOne_returnLastTwoElementsSwapped()
         {
-            CollectionAssert.AreEqual(factoradicPermutationGenerator.getPermutation(1, new int[] { 1, 2, 3, 4, 5 }), new int[] { 1, 2, 3, 5, 4 });
+            CollectionAssert.AreEqual(factoradicPermutationGenerator.getPermutation(1), new int[] { 1, 0});
+        }
+
+        [TestMethod]
+        public void getPermutation_PermIndex463_return341010()
+        {
+            CollectionAssert.AreEqual(factoradicPermutationGenerator.getPermutation(463), new int[] { 3, 4, 1, 0, 1, 0 });
         }
 
         [TestMethod]
